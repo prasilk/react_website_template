@@ -43,9 +43,9 @@ function Header(props) {
         color="primary"
         position="sticky"
         elevation={0}
-        style={{ minHeight: 60 }}
+        style={{ minHeight: 80 }}
       >
-        <Toolbar style={{ minHeight: 58 }}>
+        <Toolbar style={{ minHeight: 78 }}>
           <Grid container spacing={1} alignItems="center">
             <Hidden smUp>
               <Grid item>
@@ -61,7 +61,7 @@ function Header(props) {
             </Hidden>
             <Grid item xs>
               <Typography color="inherit" variant="h5" component="h1">
-                Authentication
+                Dashboard
               </Typography>
             </Grid>
             <Grid item xs />

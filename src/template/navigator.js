@@ -23,7 +23,7 @@ const categories = [
   {
     id: "Develop",
     children: [
-      { id: "Authentication", icon: <PeopleIcon />, active: true },
+      { id: "Dashboard", icon: <PeopleIcon />, active: true },
       { id: "Database", icon: <DnsRoundedIcon /> },
       { id: "Storage", icon: <PermMediaOutlinedIcon /> },
       { id: "Hosting", icon: <PublicIcon /> },
@@ -68,7 +68,9 @@ const styles = (theme) => ({
     color: theme.palette.common.white,
   },
   itemActiveItem: {
-    color: "#4fc3f7",
+    color: theme.palette.secondary.light,
+    fontWeight: "bold",
+    fontSize: 16,
   },
   itemPrimary: {
     fontSize: "inherit",
@@ -88,12 +90,13 @@ function Navigator(props) {
   return (
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
-        <ListItem
-          className={clsx(classes.firebase, classes.item, classes.itemCategory)}
-        >
-          Paperbase
+        <ListItem style={{ padding: 0 }}>
+          <img
+            style={{ width: "inherit" }}
+            src="/assets/images/purtainet_logo.png"
+          />
         </ListItem>
-        <ListItem className={clsx(classes.item, classes.itemCategory)}>
+        {/* <ListItem className={clsx(classes.item, classes.itemCategory)}>
           <ListItemIcon className={classes.itemIcon}>
             <HomeIcon />
           </ListItemIcon>
@@ -102,9 +105,9 @@ function Navigator(props) {
               primary: classes.itemPrimary,
             }}
           >
-            Project Overview
+            Home
           </ListItemText>
-        </ListItem>
+        </ListItem> */}
         {categories.map(({ id, children }) => (
           <React.Fragment key={id}>
             <ListItem className={classes.categoryHeader}>
