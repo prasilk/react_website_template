@@ -1,12 +1,21 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
-let basictheme = createMuiTheme({
+let theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#01579b",
+      light: "#5E87D4",
+      main: "#274d94",
+      dark: "#0945B3",
     },
     secondary: {
-      main: "#1c54b2",
+      light: "#63ccff",
+      main: "#009be5",
+      dark: "#006db3",
+    },
+    error: {
+      light: "#bf4b52",
+      main: "#af1f27",
+      dark: "#7a151b",
     },
   },
   typography: {
@@ -31,34 +40,57 @@ let basictheme = createMuiTheme({
   },
 });
 
-export const theme = {
-  ...basictheme,
+theme = {
+  ...theme,
   overrides: {
+    main: {
+      padding: theme.spacing(6, 4),
+      background: "#eaeff1",
+    },
     MuiDrawer: {
       paper: {
         backgroundColor: "#18202c",
       },
     },
     MuiButton: {
+      outlined: {
+        borderRadius: 2,
+      },
       label: {
+        borderRadius: 2,
         textTransform: "none",
       },
       contained: {
+        borderRadius: 2,
         boxShadow: "none",
         "&:active": {
           boxShadow: "none",
         },
       },
     },
+    MuiAccordionSummary: {
+      root: {
+        "&$expanded": {
+          minHeight: 48,
+          margin: 0,
+        },
+      },
+      content: {
+        margin: 0,
+        "&$expanded": {
+          margin: 0,
+        },
+      },
+    },
     MuiTabs: {
       root: {
-        marginLeft: basictheme.spacing(1),
+        marginLeft: theme.spacing(1),
       },
       indicator: {
         height: 3,
         borderTopLeftRadius: 3,
         borderTopRightRadius: 3,
-        backgroundColor: basictheme.palette.common.white,
+        backgroundColor: theme.palette.common.white,
       },
     },
     MuiTab: {
@@ -67,7 +99,7 @@ export const theme = {
         margin: "0 16px",
         minWidth: 0,
         padding: 0,
-        [basictheme.breakpoints.up("md")]: {
+        [theme.breakpoints.up("md")]: {
           padding: 0,
           minWidth: 0,
         },
@@ -75,7 +107,7 @@ export const theme = {
     },
     MuiIconButton: {
       root: {
-        padding: basictheme.spacing(1),
+        padding: theme.spacing(1),
       },
     },
     MuiTooltip: {
@@ -90,7 +122,7 @@ export const theme = {
     },
     MuiListItemText: {
       primary: {
-        fontWeight: basictheme.typography.fontWeightMedium,
+        fontWeight: theme.typography.fontWeightMedium,
       },
     },
     MuiListItemIcon: {
@@ -110,3 +142,4 @@ export const theme = {
     },
   },
 };
+export default theme;
