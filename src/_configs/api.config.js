@@ -10,3 +10,9 @@ export const api = {
     get: "sample2",
   },
 };
+
+export const authorizationApi = {
+  sample1: {
+    post: "login",
+  },
+};

@@ -1,7 +1,7 @@
 import axios from "axios";
 import _ from "lodash";
 import { apiVersion, authorizationApi } from "../_configs";
-var runTimeConfig = require("../_configs/runtime.config");
+// var runTimeConfig = require("../_configs/runtime.config");
 
 const getCookies = () =>
   document.cookie.split(";").reduce((cookies, item) => {
@@ -20,37 +20,52 @@ export const apiService = {
   downloadFileAsGet,
 };
 
-async function get(url, params) {
-  return axios.get(process.env.REACT_APP_DOMAIN + apiVersion + url, { params }); //creating multiple Api requests and storing in a array
+async function get(url, params, thirdPartyApi) {
+  url =
+    thirdPartyApi === true
+      ? url
+      : process.env.REACT_APP_DOMAIN + apiVersion + url;
+  return axios.get(url, { params }); //creating multiple Api requests and storing in a array
 }
 
-async function deleteMethod(url) {
-  return axios({
-    method: "delete",
-    url: process.env.REACT_APP_DOMAIN + apiVersion + url,
-  });
+async function deleteMethod(url, thirdPartyApi) {
+  url =
+    thirdPartyApi === true
+      ? url
+      : process.env.REACT_APP_DOMAIN + apiVersion + url;
+  return axios({ method: "delete", url });
 }
-async function put(url, params) {
-  return axios({
-    method: "put",
-    url: process.env.REACT_APP_DOMAIN + apiVersion + url,
-    data: params,
-  });
-}
-
-async function post(url, params) {
-  return axios({
-    method: "post",
-    url: process.env.REACT_APP_DOMAIN + apiVersion + url,
-    data: params,
-  });
+async function put(url, params, thirdPartyApi) {
+  url =
+    thirdPartyApi === true
+      ? url
+      : process.env.REACT_APP_DOMAIN + apiVersion + url;
+  return axios({ method: "put", url, data: params });
 }
 
-async function downloadFileAsPost(url, params, downloadProgressEvent) {
+async function post(url, params, thirdPartyApi) {
+  url =
+    thirdPartyApi === true
+      ? url
+      : process.env.REACT_APP_DOMAIN + apiVersion + url;
+  return axios({ method: "post", url, data: params });
+}
+
+async function downloadFileAsPost(
+  url,
+  params,
+  downloadProgressEvent,
+  thirdPartyApi
+) {
   //downloadProgressEvent Function will recevie 0 - 100 value revealing the download progress percentage
+
+  url =
+    thirdPartyApi === true
+      ? url
+      : process.env.REACT_APP_DOMAIN + apiVersion + url;
   return axios({
     method: "post",
-    url: process.env.REACT_APP_DOMAIN + apiVersion + url,
+    url,
     data: params,
     responseType: "arraybuffer",
     onDownloadProgress: (progressEvent) => {
@@ -63,10 +78,19 @@ async function downloadFileAsPost(url, params, downloadProgressEvent) {
   }).then((res) => saveBlob(res));
 }
 
-async function downloadFileAsGet(url, params, downloadProgressEvent) {
+async function downloadFileAsGet(
+  url,
+  params,
+  downloadProgressEvent,
+  thirdPartyApi
+) {
   //downloadProgressEvent Function will recevie 0 - 100 value revealing the download progress percentage
+  url =
+    thirdPartyApi === true
+      ? url
+      : process.env.REACT_APP_DOMAIN + apiVersion + url;
   axios
-    .get(process.env.REACT_APP_DOMAIN + apiVersion + url, {
+    .get(url, {
       params,
       responseType: "arraybuffer",
       onDownloadProgress: (progressEvent) => {
@@ -83,34 +107,6 @@ async function downloadFileAsGet(url, params, downloadProgressEvent) {
 function concurrent(requests) {
   return axios.all(requests);
 }
-
-axios.interceptors.request.use(
-  function (config) {
-    if (runTimeConfig && runTimeConfig.accessTokens)
-      config.headers = {
-        ...config.headers,
-        Authorization: "Bearer " + runTimeConfig.accessTokens.backend,
-      };
-    return config;
-  },
-  function (error) {
-    // Do something with request error
-    return Promise.reject(error);
-  }
-);
-
-axios.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    console.log(error);
-    if (
-      error.config.url.includes(authorizationApi.default) &&
-      error.response.status === 403
-    ) {
-      // window.location = "/";
-    }
-  }
-);
 
 function saveBlob(res) {
   let filename = res.headers["content-disposition"]

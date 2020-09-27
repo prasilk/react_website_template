@@ -28,17 +28,17 @@ const categories = [
 
         children: [
           {
-            id: "child1",
+            id: "subheader1-child1",
             title: "child 1",
             link: "/subheader1/child1",
           },
           {
-            id: "child2",
+            id: "subheader1-child2",
             title: "child 2",
             link: "/subheader1/child2",
           },
           {
-            id: "child3",
+            id: "subheader1-child3",
             title: "child 3",
             link: "/subheader1/child3",
           },
@@ -50,12 +50,12 @@ const categories = [
 
         children: [
           {
-            id: "child1",
+            id: "subheader2-child1",
             title: "child 1",
             link: "/subheader2/child1",
           },
           {
-            id: "child2",
+            id: "subheader2-child2",
             title: "child 2",
             link: "/subheader2/child2",
           },
@@ -67,12 +67,12 @@ const categories = [
 
         children: [
           {
-            id: "child1",
+            id: "subheader3-child1",
             title: "child 1",
             link: "/subheader3/child1",
           },
           {
-            id: "child2",
+            id: "subheader3-child2",
             title: "child 2",
             link: "/subheader3/child2",
           },
