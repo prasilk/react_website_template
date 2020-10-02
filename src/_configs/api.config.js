@@ -1,8 +1,8 @@
 export const apiVersion = "/api/v1/";
 
 export const api = {
-  sample1: {
-    get: "sample1",
+  cities: {
+    get: "http://dummy.restapiexample.com/api/v1/employees",
     post: "sample1",
     delete: "sample1",
   },

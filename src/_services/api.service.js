@@ -25,6 +25,7 @@ async function get(url, params, thirdPartyApi) {
     thirdPartyApi === true
       ? url
       : process.env.REACT_APP_DOMAIN + apiVersion + url;
+  if (process.env.REACT_APP_ENV === "development") console.log("ajsdlkjsakl");
   return axios.get(url, { params }); //creating multiple Api requests and storing in a array
 }
 

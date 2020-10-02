@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Paper } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
 
 export class Child2 extends Component {
   componentDidMount() {
@@ -8,6 +8,10 @@ export class Child2 extends Component {
 
   render() {
     const { classes } = this.props;
-    return <Paper className={classes.paper}>Child 3</Paper>;
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h5">Child 2</Typography>
+      </Paper>
+    );
   }
 }

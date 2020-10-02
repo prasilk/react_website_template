@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper } from "@material-ui/core";
+import { Button, Paper } from "@material-ui/core";
 import { apiService } from "../../../_services";
 import {
   CAutocompleteMultiSelect,
@@ -12,8 +12,9 @@ export class Child1 extends CComponent {
     super(props);
     this.state = {
       employees: [],
+      cities: [],
       selectedEmployee: null,
-      selectedEmployees: [],
+      selectedCities: [],
     };
   }
   componentDidMount() {
